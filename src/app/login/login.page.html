@@ -1,0 +1,59 @@
+<ion-content>
+  <h1 class="ion-text-center">{{ loginFlag ? "Bienvenido" : "Registrate" }}</h1>
+  <div class="user-img-container" *ngIf="false">
+    <img
+      class="user-img"
+      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+      alt="user image"
+    />
+  </div>
+  <div class="ion-text-center ion-margin-top" *ngIf="!loginFlag">
+    <ion-button color="light"><ion-icon name="camera"></ion-icon></ion-button>
+    <ion-button color="light"><ion-icon name="image"></ion-icon></ion-button>
+  </div>
+  <ion-list>
+    <ion-item *ngIf="!loginFlag">
+      <ion-label color="primary" position="floating">Nickname</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!loginFlag">
+      <ion-label color="primary" position="floating"
+        >Repetir contraseña</ion-label
+      >
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Estado</ion-label>
+      <ion-select>
+        <ion-select-option value="Conectado">Conectado</ion-select-option>
+        <ion-select-option value="Ausente">Ausente</ion-select-option>
+        <ion-select-option value="Ocupado">Ocupado</ion-select-option>
+        <ion-select-option value="Desconectado">Desconectado</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding-top">
+    <p class="ion-text-center" *ngIf="!loginFlag" (click)="loginFlag = true">
+      <span
+        >¿ Ya tienes cuenta ?
+        <ion-text color="primary">click aquí</ion-text></span
+      >
+    </p>
+    <p class="ion-text-center" *ngIf="loginFlag" (click)="loginFlag = false">
+      <span
+        >¿ Aún no tienes cuenta ?
+        <ion-text color="primary">click aquí</ion-text></span
+      >
+    </p>
+    <ion-button expand="block" *ngIf="loginFlag">Ingresar</ion-button>
+    <ion-button expand="block" *ngIf="!loginFlag">Registrarse</ion-button>
+  </div>
+</ion-content>

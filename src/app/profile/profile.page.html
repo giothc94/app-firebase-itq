@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 class="ion-text-center">Bienvenido</h1>
+  <div class="user-img-container">
+    <img
+      class="user-img"
+      src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+      alt="user image"
+    />
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" position="floating">Nickname</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Estado</ion-label>
+      <ion-select>
+        <ion-select-option value="Conectado">Conectado</ion-select-option>
+        <ion-select-option value="Ausente">Ausente</ion-select-option>
+        <ion-select-option value="Ocupado">Ocupado</ion-select-option>
+        <ion-select-option value="Desconectado">Desconectado</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding-top">
+    <ion-button expand="block">Guardar</ion-button>
+  </div>
+</ion-content>

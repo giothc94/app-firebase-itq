@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>conversation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <div class="user-img-container">
+          <img
+            class="user-img"
+            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+            alt="user image"
+          />
+        </div>
+      </ion-col>
+      <ion-col size="8" class="ion-align-self-center">
+        <h2><b>Nickname</b></h2>
+        <p>Estado</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon name="paper-plane-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button color="dark"
+        ><ion-icon name="image"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-button color="dark"
+        ><ion-icon name="camera"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button color="dark"
+        ><ion-icon name="barcode-outline"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea rows="2"></ion-textarea>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button><ion-icon name="send"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
