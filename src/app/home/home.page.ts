@@ -10,6 +10,7 @@ import { MenuController, NavController } from "@ionic/angular";
 })
 export class HomePage {
   user = {} as User;
+  friends = [];
 
   constructor(
     private menu: MenuController,
@@ -25,6 +26,12 @@ export class HomePage {
           this.user.nickname = data.nickname;
           this.user.status = data.status;
         });
+        this.userService.getUsers().on("value", (snapshot) => {
+          this.friends = [];
+          snapshot.forEach((user) => {
+            this.friends.push({uid: user.key, profile: user.val()})
+          })
+        })
       } else this.router.navigateRoot(["login"]);
     });
   }

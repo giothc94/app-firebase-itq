@@ -41,10 +41,10 @@
         <ion-list>
           <ion-list-header>Amigos</ion-list-header>
           <ion-item
-            *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]"
+            *ngFor="let friend of friends"
             lines="none"
             detail="false"
-            [routerLink]="['/conversation', item]" 
+            [routerLink]="['/conversation', friend.uid]" 
           >
             <ion-avatar slot="start">
               <img
@@ -53,8 +53,8 @@
               />
             </ion-avatar>
             <ion-label>
-              <h2>Nickname</h2>
-              <h3>Estado</h3>
+              <h2>{{friend.profile.nickname}}</h2>
+              <h3>{{friend.profile.status}}</h3>
             </ion-label>
           </ion-item>
         </ion-list>

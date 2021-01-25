@@ -20,8 +20,8 @@
         </div>
       </ion-col>
       <ion-col size="8" class="ion-align-self-center">
-        <h2><b>Nickname</b></h2>
-        <p>Estado</p>
+        <h2><b>{{friend.nickname}}</b></h2>
+        <p>{{friend.status}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -45,12 +45,14 @@
   </ion-fab>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <ion-item>
-      <ion-textarea rows="2"></ion-textarea>
-    </ion-item>
-    <ion-buttons slot="end">
-      <ion-button><ion-icon name="send"></ion-icon></ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+  <form [formGroup]="form" (ngSubmit)="sendMessage()">
+    <ion-toolbar>
+      <ion-item>
+        <ion-textarea rows="2" formControlName="text"></ion-textarea>
+      </ion-item>
+      <ion-buttons slot="end">
+        <ion-button type="submit"><ion-icon name="send"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </form>
 </ion-footer>

@@ -15,6 +15,10 @@ export class UsersService {
     return this.db.ref(`users/${uid}`)
   }
 
+  getUsers() {
+    return this.db.ref('users')
+  }
+
   updateUser(uid, data) {
     this.db.ref(`users/${uid}`).update(data);
   }
