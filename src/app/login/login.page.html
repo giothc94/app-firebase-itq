@@ -11,49 +11,118 @@
     <ion-button color="light"><ion-icon name="camera"></ion-icon></ion-button>
     <ion-button color="light"><ion-icon name="image"></ion-icon></ion-button>
   </div>
-  <ion-list>
-    <ion-item *ngIf="!loginFlag">
-      <ion-label color="primary" position="floating">Nickname</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="floating">Email</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="floating">Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!loginFlag">
-      <ion-label color="primary" position="floating"
-        >Repetir contraseña</ion-label
-      >
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="floating">Estado</ion-label>
-      <ion-select>
-        <ion-select-option value="Conectado">Conectado</ion-select-option>
-        <ion-select-option value="Ausente">Ausente</ion-select-option>
-        <ion-select-option value="Ocupado">Ocupado</ion-select-option>
-        <ion-select-option value="Desconectado">Desconectado</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <div class="ion-padding-top">
-    <p class="ion-text-center" *ngIf="!loginFlag" (click)="loginFlag = true">
-      <span
-        >¿ Ya tienes cuenta ?
-        <ion-text color="primary">click aquí</ion-text></span
-      >
-    </p>
-    <p class="ion-text-center" *ngIf="loginFlag" (click)="loginFlag = false">
-      <span
-        >¿ Aún no tienes cuenta ?
-        <ion-text color="primary">click aquí</ion-text></span
-      >
-    </p>
-    <ion-button expand="block" *ngIf="loginFlag">Ingresar</ion-button>
-    <ion-button expand="block" *ngIf="!loginFlag">Registrarse</ion-button>
+  <div *ngIf="loginFlag">
+    <!-- login form -->
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-list>
+        <ion-item>
+          <ion-label color="primary" position="floating">Email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+        <p class="error" *ngIf="email.touched && email.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <p class="error" *ngIf="email.touched && email.getError('email')">
+          <small>* Este campo debe ser un email</small>
+        </p>
+        <p class="error" *ngIf="email.touched && email.getError('minlength')">
+          <small>* Este campo debe contener minimo 4 caracteres</small>
+        </p>
+        <ion-item>
+          <ion-label color="primary" position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <p
+          class="error"
+          *ngIf="password.touched && password.getError('required')"
+        >
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <ion-item>
+          <ion-label color="primary" position="floating">Estado</ion-label>
+          <ion-select formControlName="status">
+            <ion-select-option value="Conectado">Conectado</ion-select-option>
+            <ion-select-option value="Ausente">Ausente</ion-select-option>
+            <ion-select-option value="Ocupado">Ocupado</ion-select-option>
+            <ion-select-option value="Desconectado"
+              >Desconectado</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <p class="error" *ngIf="status.touched && status.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+      </ion-list>
+      <div class="ion-padding-top">
+        <p class="ion-text-center" (click)="loginFlag = false">
+          <span
+            >¿ Aún no tienes cuenta ?
+            <ion-text color="primary">click aquí</ion-text></span
+          >
+        </p>
+        <ion-button expand="block" type="submit">Ingresar</ion-button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!loginFlag">
+    <!-- register form -->
+    <form [formGroup]="registerForm" (ngSubmit)="checkin()">
+      <ion-list>
+        <ion-item>
+          <ion-label color="primary" position="floating">Nickname</ion-label>
+          <ion-input formControlName="nickname"></ion-input>
+        </ion-item>
+        <p class="error" *ngIf="nickname.touched && nickname.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <p class="error" *ngIf="nickname.touched && nickname.getError('maxlength')">
+          <small>* Este campo debe contener maximo 15 caracteres</small>
+        </p>
+        <ion-item>
+          <ion-label color="primary" position="floating">Email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+        <p class="error" *ngIf="email.touched && email.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <p class="error" *ngIf="email.touched && email.getError('email')">
+          <small>* Este campo debe ser un email</small>
+        </p>
+        <ion-item>
+          <ion-label color="primary" position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <p class="error" *ngIf="password.touched && password.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <p class="error" *ngIf="password.touched && password.getError('minlength')">
+          <small>* Este campo debe contener minimo 6 caracteres</small>
+        </p>
+        <ion-item>
+          <ion-label color="primary" position="floating"
+            >Confirmar contraseña</ion-label
+          >
+          <ion-input
+            formControlName="confirmPassword"
+            type="password"
+          ></ion-input>
+        </ion-item>
+        <p class="error" *ngIf="confirmPassword.touched && confirmPassword.getError('required')">
+          <small>* Este campo es obligatorio</small>
+        </p>
+        <p class="error" *ngIf="confirmPassword.touched && registerForm.hasError('confirmPassword')">
+          <small>* Las contraseñas no coinciden</small>
+        </p>
+      </ion-list>
+      <div class="ion-padding-top">
+        <p class="ion-text-center" (click)="loginFlag = true">
+          <span
+            >¿ Ya tienes cuenta ?
+            <ion-text color="primary">click aquí</ion-text></span
+          >
+        </p>
+        <ion-button expand="block" type="submit" [disabled]="registerForm.invalid">Registrarse</ion-button>
+      </div>
+    </form>
   </div>
 </ion-content>

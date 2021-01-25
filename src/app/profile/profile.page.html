@@ -16,22 +16,26 @@
       alt="user image"
     />
   </div>
-  <ion-list>
-    <ion-item>
-      <ion-label color="primary" position="floating">Nickname</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" position="floating">Estado</ion-label>
-      <ion-select>
-        <ion-select-option value="Conectado">Conectado</ion-select-option>
-        <ion-select-option value="Ausente">Ausente</ion-select-option>
-        <ion-select-option value="Ocupado">Ocupado</ion-select-option>
-        <ion-select-option value="Desconectado">Desconectado</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <div class="ion-padding-top">
-    <ion-button expand="block">Guardar</ion-button>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="updateUser()">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" position="floating">Nickname</ion-label>
+        <ion-input formControlName="nickname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Estado</ion-label>
+        <ion-select formControlName="status">
+          <ion-select-option value="Conectado">Conectado</ion-select-option>
+          <ion-select-option value="Ausente">Ausente</ion-select-option>
+          <ion-select-option value="Ocupado">Ocupado</ion-select-option>
+          <ion-select-option value="Desconectado"
+            >Desconectado</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding-top">
+      <ion-button expand="block" type="submit">Guardar</ion-button>
+    </div>
+  </form>
 </ion-content>
