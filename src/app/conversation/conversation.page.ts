@@ -18,6 +18,7 @@ export class ConversationPage implements OnInit {
   friend = {} as User;
   form: FormGroup;
   conversation = {} as Conversation;
+  conversations: Array<Conversation>;
 
   constructor(
     private router: NavController,
@@ -46,6 +47,7 @@ export class ConversationPage implements OnInit {
             this.conversation.uid = [this.currentUserId, this.friend.uid]
               .sort()
               .join("|");
+            this.getConversation();
           });
         });
       } else this.router.navigateRoot(["login"]);
@@ -59,8 +61,24 @@ export class ConversationPage implements OnInit {
       this.conversation.receiver = this.friend.uid;
       this.conversation.sender = this.currentUserId;
 
-      this.conversationService.createConversation(this.conversation)
-      this.form.reset()
+      this.conversationService.createConversation(this.conversation);
+      this.form.reset();
     }
+  }
+
+  getConversation() {
+    this.conversationService
+      .getConversation(this.conversation.uid)
+      .on("value", (snapshot) => {
+        this.conversations = [];
+        // snapshot.val() === valores
+        // snapshot.key === llave del nodo
+        // snapshot.forEach === recorre todo el nodo
+        // snapshot.toJSON === retorn un objecto JS
+        snapshot.forEach((conversation) => {
+          let message = <Conversation>conversation.toJSON();
+          this.conversations.push(message);
+        });
+      });
   }
 }
