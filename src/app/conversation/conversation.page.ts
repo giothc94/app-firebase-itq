@@ -60,10 +60,23 @@ export class ConversationPage implements OnInit {
       this.conversation.timestamp = Date.now();
       this.conversation.receiver = this.friend.uid;
       this.conversation.sender = this.currentUserId;
-
+      this.conversation.type = "text";
       this.conversationService.createConversation(this.conversation);
       this.form.reset();
     }
+  }
+
+  sendBuzz() {
+    this.conversation.timestamp = Date.now();
+    this.conversation.receiver = this.friend.uid;
+    this.conversation.sender = this.currentUserId;
+    this.conversation.type = "buzz";
+    this.conversationService.createConversation(this.conversation);
+  }
+
+  doBuzz() {
+    const buzz = new Audio("assets/sound/zumbido.mp3");
+    buzz.play();
   }
 
   getConversation() {
@@ -71,12 +84,16 @@ export class ConversationPage implements OnInit {
       .getConversation(this.conversation.uid)
       .on("value", (snapshot) => {
         this.conversations = [];
-        // snapshot.val() === valores
-        // snapshot.key === llave del nodo
-        // snapshot.forEach === recorre todo el nodo
-        // snapshot.toJSON === retorn un objecto JS
         snapshot.forEach((conversation) => {
           let message = <Conversation>conversation.toJSON();
+          if (
+            message.type === "buzz" &&
+            message.receiver === this.currentUserId
+          ) {
+            let minutesDateMessage = new Date(message.timestamp).getMinutes();
+            let minutesCurrentDate = new Date().getMinutes()
+            this.doBuzz();
+          }
           this.conversations.push(message);
         });
       });

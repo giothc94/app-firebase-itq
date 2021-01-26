@@ -38,7 +38,7 @@
       ></ion-fab-button>
     </ion-fab-list>
     <ion-fab-list side="start">
-      <ion-fab-button color="dark"
+      <ion-fab-button color="dark" (click)="sendBuzz()"
         ><ion-icon name="barcode-outline"></ion-icon
       ></ion-fab-button>
     </ion-fab-list>
@@ -52,14 +52,24 @@
         *ngIf="conversation.sender === currentUserId; else sender"
       >
         <ion-chip>
-          <ion-label [innerHTML]="conversation.text.split('\n').join('</br>')">
+          <ion-label
+            *ngIf="conversation.type === 'text'"
+            [innerHTML]="conversation.text.split('\n').join('</br>')"
+          >
+          </ion-label>
+          <ion-label *ngIf="conversation.type === 'buzz'">
+            <ion-icon name="barcode-outline"></ion-icon>
           </ion-label>
         </ion-chip>
       </ion-col>
       <ng-template #sender>
         <ion-col size="10">
           <ion-chip>
+            <ion-label *ngIf="conversation.type === 'buzz'">
+              <ion-icon name="barcode-outline"></ion-icon>
+            </ion-label>
             <ion-label
+              *ngIf="conversation.type === 'text'"
               [innerHTML]="conversation.text.split('\n').join('</br>')"
             >
             </ion-label> </ion-chip
