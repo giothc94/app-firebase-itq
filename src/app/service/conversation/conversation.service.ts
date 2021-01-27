@@ -19,6 +19,10 @@ export class ConversationService {
   }
 
   getConversation(uid) {
-    return this.db.ref(`conversation/${uid}`)
+    return this.db.ref(`conversation/${uid}`);
+  }
+
+  buzzConversationRead(uid, timestamp) {
+    this.db.ref(`conversation/${uid}/${timestamp}`).update({ read: true });
   }
 }
