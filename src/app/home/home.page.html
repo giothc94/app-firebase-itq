@@ -4,6 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> Home </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPromp()"
+        ><ion-icon name="person-add-outline"></ion-icon
+      ></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -44,7 +49,7 @@
             *ngFor="let friend of friends"
             lines="none"
             detail="false"
-            [routerLink]="['/conversation', friend.uid]" 
+            [routerLink]="['/conversation', friend.uid]"
           >
             <ion-avatar slot="start">
               <img
