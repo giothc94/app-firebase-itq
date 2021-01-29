@@ -8,8 +8,8 @@
     />
   </div>
   <div class="ion-text-center ion-margin-top" *ngIf="!loginFlag">
-    <ion-button color="light"><ion-icon name="camera"></ion-icon></ion-button>
-    <ion-button color="light"><ion-icon name="image"></ion-icon></ion-button>
+    <ion-button color="light" (click)="getPicture('camera')"><ion-icon name="camera"></ion-icon></ion-button>
+    <ion-button color="light" (click)="getPicture('galeria')"><ion-icon name="image"></ion-icon></ion-button>
   </div>
   <div *ngIf="loginFlag">
     <!-- login form -->

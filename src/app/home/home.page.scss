@@ -22,3 +22,11 @@
   width: 100%;
   border-radius: 50%;
 }
+
+ion-chip {
+  height: auto;
+  width: 100%;
+  padding: 1rem 2rem 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}

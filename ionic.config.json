@@ -1,5 +1,7 @@
 {
   "name": "messenger-itq",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

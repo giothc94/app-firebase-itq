@@ -5,6 +5,7 @@ import firebase from "firebase";
 import { User } from "../interfaces/User";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { CustomValidators } from "src/utils/CustomValidators";
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     public toast: ToastController,
     private router: NavController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private camera: Camera
   ) {
     this.buildForm();
   }
@@ -29,7 +31,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.menu.enable(false);
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) this.router.navigateRoot(['home'])
+      if (user) this.router.navigateRoot(["home"]);
     });
   }
 
@@ -94,6 +96,26 @@ export class LoginPage implements OnInit {
       console.error(error);
     }
   }
+
+  async getPicture(source: string) {
+    try {
+      const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType:
+          source === "camera"
+            ? this.camera.PictureSourceType.CAMERA
+            : this.camera.PictureSourceType.PHOTOLIBRARY,
+      };
+      let imageData = await this.camera.getPicture(options);
+      let base64Image = `data:image/jpeg;base64,${imageData}`;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // getter
   get email() {
     if (this.loginFlag) return this.loginForm.get("email");

@@ -44,6 +44,25 @@
     <ion-row>
       <ion-col size="12">
         <ion-list>
+          <ion-list-header>Solicitudes de amistad</ion-list-header>
+          <ion-item
+            *ngFor="let request of friendRequests"
+            lines="none"
+            detail="false"
+          >
+            <ion-chip (click)="presentRequest(request)">
+              <ion-label>
+                <h2>{{request.sender.nickname}}</h2>
+                <p>{{request.sender.email}}</p>
+                <h4>{{request.status}}</h4>
+              </ion-label>
+              <ion-icon name="person-add"></ion-icon>
+            </ion-chip>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="12">
+        <ion-list>
           <ion-list-header>Amigos</ion-list-header>
           <ion-item
             *ngFor="let friend of friends"
